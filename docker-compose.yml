@@ -46,7 +46,7 @@ services:
       - '--storage.path=/alertmanager'
       - '--cluster.listen-address='
     ports:
-      - "9093:9093"
+      - "9095:9093"
     networks:
       - datt-network
     restart: always
