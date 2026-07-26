@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     container_name: lookout-api
     ports:
-      - "8080:8080"
+      - "8082:8080"
     networks:
       - datt-network
     restart: always

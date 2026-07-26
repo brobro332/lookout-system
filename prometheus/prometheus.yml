@@ -26,4 +26,4 @@ scrape_configs:
   - job_name: 'lookout-system'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['host.docker.internal:8080']
+      - targets: ['lookout-api:8080']
