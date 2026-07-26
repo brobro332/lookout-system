@@ -12,3 +12,11 @@
   - docker-compose.yml 작성 및 각 모니터링 툴(Prometheus, Loki, Promtail, Grafana, Alertmanager) 배치
   - Promtail을 이용해 호스트의 Docker 로그 폴더 마운트 (애플리케이션 로그 무설정 자동 수집)
   - Grafana 접속 비밀번호를 환경변수로 분리
+
+### f64c0e6 CI/CD 구축 및 Spring Boot 도커라이징
+- **작업 파일**: Dockerfile, docker-compose.yml, .github/workflows/deploy.yml
+- **작업 목적**: 알람 수신용 Spring Boot 앱 컨테이너화 및 전체 스택의 GitHub Actions 자동 배포 세팅
+- **작업 내용**:
+  - Dockerfile: lookout-api용 멀티 스테이지 빌드 작성
+  - docker-compose.yml: lookout-api 서비스 추가
+  - .github/workflows/deploy.yml: 서버로 파일 전송 및 docker-compose up -d --build 실행 파이프라인 작성

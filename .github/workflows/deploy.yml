@@ -1,0 +1,36 @@
+name: Deploy Lookout System
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Copy Files to Server
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "."
+          target: "/home/${{ secrets.SSH_USER }}/lookout-system"
+
+      - name: Deploy via Docker Compose
+        uses: appleboy/ssh-action@v0.1.10
+        env:
+          GRAFANA_PASSWORD: ${{ secrets.GRAFANA_PASSWORD }}
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: GRAFANA_PASSWORD
+          script: |
+            cd /home/${{ secrets.SSH_USER }}/lookout-system
+            export GRAFANA_PASSWORD=$GRAFANA_PASSWORD
+            docker-compose up -d --build
