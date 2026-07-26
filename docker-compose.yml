@@ -99,6 +99,7 @@ services:
 networks:
   datt-network:
     external: true
+    name: datt-platform_datt-network
 
 volumes:
   prometheus-data:
